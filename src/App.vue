@@ -3,7 +3,7 @@ import Accounts from './components/Accounts/Accounts.vue'
 </script>
 
 <template>
-  <div class="ml-10 mt-10">
+  <div class="m-10">
     <Accounts />
   </div>
 </template>

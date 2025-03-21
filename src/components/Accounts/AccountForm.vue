@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { ref, watch } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { useAccounts } from '@/stores/useAccounts'
+import { useAccountsStore } from '@/stores/accounts.store'
 
 import { Eye, EyeOff, Trash } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
@@ -37,7 +38,8 @@ const { account } = defineProps<{
   account: Account
 }>()
 
-const { updateAccount } = useAccounts()
+// const { updateAccount } = useAccounts()
+const { updateAccount } = useAccountsStore()
 
 const isPasswordVisible = ref(false)
 
@@ -92,7 +94,6 @@ const onSubmit = handleSubmit((values) => {
 watchDebounced(
   () => [formValues],
   async (values) => {
-    console.log(formValues)
     await onSubmit()
   },
   { debounce: 500, maxWait: 3000, deep: true },

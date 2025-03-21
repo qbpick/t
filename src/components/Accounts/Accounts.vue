@@ -13,58 +13,15 @@ import {
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import AccountForm from './AccountForm.vue'
 import { computed, ref, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import type { BaseAccountDTO, Account } from '@/types/account.d.ts'
 import { useAccounts } from '@/stores/useAccounts'
+import { useAccountsStore } from '@/stores/accounts.store'
 </script>
 <script setup lang="ts">
-// const accounts = ref<Account[]>([
-//   {
-//     id: 1,
-//     type: 'LDAP',
-//     login: 'login',
-//     password: null,
-//     labels: 'label1; label2',
-//   },
-//   {
-//     id: 2,
-//     type: 'local',
-//     login: 'login',
-//     password: 'password',
-//     labels: 'label1; label2',
-//   },
-//   {
-//     id: 3,
-//     type: 'local',
-//     login: 'login',
-//     password: 'password',
-//     labels: 'label1; label2',
-//   },
-// ])
-
-// const seriallizedAccounts = computed<BaseAccountDTO[]>(() => {
-//   return accounts.value.map((a) => {
-//     return {
-//       type: a.type,
-//       id: a.id,
-//       login: a.login,
-//       password: a.password,
-//       labels: a.labels
-//         .split(';')
-//         .map((l) => l.trim())
-//         .map((l) => ({ text: l })),
-//     }
-//   })
-// })
-
-const { accounts, createAccount, removeAccount } = useAccounts()
-
-watch(
-  () => accounts.value,
-  () => {
-    console.log(accounts.value)
-  },
-  { deep: true },
-)
+// const { accounts, createAccount, removeAccount } = useAccounts()
+const { accounts } = storeToRefs(useAccountsStore())
+const { createAccount, removeAccount } = useAccountsStore()
 </script>
 
 <template>
